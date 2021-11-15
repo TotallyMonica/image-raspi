@@ -5,9 +5,10 @@ processInput=''
 runSuccess=0
 
 # Check to see if being ran as root
-if [[ $UID!=0 ]]
+if [[ $UID != 0 ]]
 then
     echo "Error: Not being ran as root (most distros you need to preface the command with sudo"
+    echo $UID
     exit
 fi
 
