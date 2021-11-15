@@ -18,7 +18,9 @@ echo "This program contains absolutely no warranty where permissible by law."
 echo "By continuing to use this program, you consent to the Terms of Service of this program and understand the risks."
 echo "If you do not consent to the Terms of Service, please close the program now."
 echo "This disclaimer will show for 10 seconds."
-sleep 10
+
+# Sleep only commented out for testing
+# sleep 10
 
 # Commented out because mass imaging isn't quite ready
 #echo "Would you like to Create an image, Restore an image, or Mass-restore images?"
@@ -27,13 +29,13 @@ sleep 10
 
 # Decide what process the user would like to run
 clear
-echo "Would you like to Create an image or Restore an image"
+echo "Would you like to (C)reate an image or (R)estore an image"
 echo "C/R"
 read processInput
 
 # Create an image
 clear
-if [[ processInput==C || processInput==c ]]
+if [[ $processInput == 'C' || $processInput == 'c' ]]
 then
 
     # Get what device to read from
@@ -55,22 +57,22 @@ then
 
     # If the user successfully passes the failsafe, then create an image
     if [[ $imageConfirmation == $failsafe ]]; then
-#   if [[ $imageConfirmation == $failsafetesting ]]; then
+   #if [[ $imageConfirmation == $failsafetesting ]]; then
         if [ -d ~/images ]; then
             echo "Images path exist, skipping"
         else
             echo "Create image path"
         fi
-        dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
+        dd if=/dev/$devName of=~/images/image-`date +%Y%m%d_%H%M%S`.img status=progress
     
     # If the user fails the failsafe, bail
     else
         echo "Confirmation failed, exiting"
         exit
     fi
-
+fi
 # Restore an image
-elif [[ processInput==R || processInput==r ]]
+if [[ $processInput == 'R' || $processInput == 'r' ]]
 then
 
     # Mark as a valid option
@@ -97,17 +99,20 @@ then
     if [ ! -e ~/images/$imagePath]; then
         echo "The image you selected does not exist. Please ensure you typed the correct name out."
         exit
+    else
+        ls -ll ~/images
+        echo "Select the image that you'd like to image"
+        read imagePath
     fi
 
-    echo "The image will be saved to ~/images and flashed to /dev/$devName"
+    echo "The image " ~/images/$imagePath " and flashed to /dev/$devName"
     echo "Please ensure everything is correct, as this process is potentially dangerous."
     echo "Type in 'I have confirmed all information is correct and understand the risks' to proceed"
     read imageConfirmation
 
     # If the user successfully passes the failsafe, then create an image
-    if [[$imageConfirmation == $failsafetesting]]
-    then
-        #dd if=~/images/$imagePath of=/dev/$devName status=progress
+    if [[ $imageConfirmation == $failsafe ]]; then
+        echo "dd if=~/images/$imagePath of=/dev/$devName status=progress"
         echo "Imaging from " ~/images/$imagePath " to " /dev/$devName
     # If the user fails the failsafe, bail
     else
@@ -116,7 +121,8 @@ then
     fi
 
 # Mass image
-elif [[ processInput == M || processInput == m ]]
+fi
+if [[ $processInput == M || $processInput == m ]]
 then
 
     # Mark as a valid option
