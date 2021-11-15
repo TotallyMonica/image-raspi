@@ -1,13 +1,14 @@
 #!/bin/bash
-failsafe='I have confirmed all information is correct and understand the risks'
-#failsafetesting='check'
+#failsafe='I have confirmed all information is correct and understand the risks'
+failsafe='check'
 processInput=''
 runSuccess=0
+user=''
 
-# Check to see if being ran as root
+# Check to see if being ran as root and if not elevate it to root
 if [[ $UID != 0 ]]
 then
-    echo "Error: Not being ran as root (most distros you need to preface the command with sudo"
+    sudo ./image-raspi.sh
     exit
 fi
 
@@ -86,25 +87,21 @@ then
     echo "What device is the SD card connected to? E.g., sdc, mmcblk0"
     read devName
 
-    # Get what image to read from
-    # TODO: Allow custom paths, currently reads from ~/images
-    ls ~/images
-    echo "Select what image you'd like to read from"
-    read imagePath
-
     # Check to see if the user followed instructions and disks are located in /dev
-    if [ ! -e /dev/$devName]; then
+    if [[ ! -e /dev/$devName ]]; then
         echo "Either you included /dev/* or your disks are located in a different path other than /dev."
         exit
     fi
 
-    # Check to see if image is valid
-    if [ ! -e ~/images/$imagePath]; then
+    # Get what image to read from
+    # and check its valididty
+    # TODO: Allow custom paths, currently reads from ~/images
+    if [[ ! -e ~/images/$imagePath ]]; then
         echo "The image you selected does not exist. Please ensure you typed the correct name out."
         exit
     else
         ls -ll ~/images
-        echo "Select the image that you'd like to image"
+        echo "Select what image you'd like to read from"
         read imagePath
     fi
 
