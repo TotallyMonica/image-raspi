@@ -2,7 +2,6 @@
 #failsafe='I have confirmed all information is correct and understand the risks'
 failsafe='check'
 processInput=''
-runSuccess=0
 user=''
 
 # Check to see if being ran as root and if not elevate it to root
@@ -38,9 +37,6 @@ read processInput
 clear
 if [[ $processInput == 'C' || $processInput == 'c' ]]
 then
-
-    # Mark as valid option
-    runSuccess = 1
 
     # Get what device to read from
     fdisk -l
@@ -78,9 +74,6 @@ then
 # Restore an image
 elif [[ $processInput == 'R' || $processInput == 'r' ]]
 then
-
-    # Mark as a valid option
-    runSuccess = 1
 
     # Get what device to write to
     fdisk -l
@@ -131,11 +124,8 @@ then
     fi
 
 # Mass image
-elif [[ $processInput == M || $processInput == m ]]
+elif [[ $processInput == 'M' || $processInput == 'm' ]]
 then
-
-    # Mark as a valid option
-    runSuccess = 1
 
     # Not ready yet, need to get a bit more comfortable with bash first
     # Easter egg: if they decide to try to get access to this, encourage them to contribute to the project.
