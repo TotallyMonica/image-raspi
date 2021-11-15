@@ -3,9 +3,15 @@ failsafe='I have confirmed all information is correct and understand the risks'
 #failsafetesting='check'
 processInput=''
 runSuccess=0
-clear
 
-#disclaimer
+# Check to see if being ran as root
+if [[ $UID!=0 ]]
+then
+    echo "Error: Not being ran as root (most distros you need to preface the command with sudo"
+fi
+
+# Disclaimer
+clear
 echo "This program, when used improperly, can irreversably destroy all data on your computer."
 echo "This program contains absolutely no warranty where permissible by law."
 echo "By continuing to use this program, you consent to the Terms of Service of this program and understand the risks."
