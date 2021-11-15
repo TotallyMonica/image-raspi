@@ -20,7 +20,7 @@ echo "If you do not consent to the Terms of Service, please close the program no
 echo "This disclaimer will show for 10 seconds."
 
 # Sleep only commented out for testing
-# sleep 10
+sleep 10
 
 # Commented out because mass imaging isn't quite ready
 #echo "Would you like to Create an image, Restore an image, or Mass-restore images?"
