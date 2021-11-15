@@ -44,6 +44,7 @@ then
 
     # Get what device to read from
     fdisk -l
+    echo ""
     echo "What device is the SD card connected to? E.g., sdc, mmcblk0"
     read devName
 
@@ -83,6 +84,7 @@ then
 
     # Get what device to write to
     fdisk -l
+    echo ""
     echo "What device is the SD card connected to? E.g., sdc, mmcblk0"
     read devName
 
@@ -100,10 +102,19 @@ then
         exit
     else
         ls -ll ~/images
+        echo ""
         echo "Select what image you'd like to read from"
+        echo "(Hint: Press enter to the most recent image)"
         read imagePath
     fi
 
+    # If user just presses enter, accept most recent file
+    if [[ -z "$imagePath" ]]; then
+        imagePath=$(ls -Art ~/images | tail -n 1)
+    fi
+
+    #Confirmation screen
+    echo ""
     echo "The image " ~/images/$imagePath " and flashed to /dev/$devName"
     echo "Please ensure everything is correct, as this process is potentially dangerous."
     echo "Type in 'I have confirmed all information is correct and understand the risks' to proceed"
@@ -111,8 +122,8 @@ then
 
     # If the user successfully passes the failsafe, then create an image
     if [[ $imageConfirmation == $failsafe ]]; then
-        echo "dd if=~/images/$imagePath of=/dev/$devName status=progress"
         echo "Imaging from " ~/images/$imagePath " to " /dev/$devName
+        echo dd if=~/images/$imagePath of=/dev/$devName status=progress
     # If the user fails the failsafe, bail
     else
         echo "Confirmation failed, exiting"
