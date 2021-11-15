@@ -1,5 +1,5 @@
 #!/bin/bash
-failsafe='I have confirmed all information is correct and understand the risks'
+#failsafe='I have confirmed all information is correct and understand the risks'
 #failsafetesting='check'
 processInput=''
 runSuccess=0
@@ -50,13 +50,11 @@ then
     if [[ $imageConfirmation == $failsafe ]]; then
 #   if [[ $imageConfirmation == $failsafetesting ]]; then
         if [ -d ~/images ]; then
-            #mkdir ~/images
             echo "Images path exist, skipping"
         else
             echo "Create image path"
         fi
-        #dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
-        echo "dd /dev/$devname command goes here"
+        dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
     
     # If the user fails the failsafe, bail
     else
