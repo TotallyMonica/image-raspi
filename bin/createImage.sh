@@ -1,5 +1,7 @@
-# Create an image
-clear
+failsafe='I have confirmed all information is correct and understand the risks'
+#failsafetesting='check'
+processInput=''
+runSuccess=0
 
 # Get what device to read from
 fdisk -l
@@ -20,13 +22,13 @@ read imageConfirmation
 
 # If the user successfully passes the failsafe, then create an image
 if [[ $imageConfirmation == $failsafe ]]; then
-#   if [[ $imageConfirmation == $failsafetesting ]]; then
+#if [[ $imageConfirmation == $failsafetesting ]]; then
     if [ -d ~/images ]; then
         echo "Images path exist, skipping"
     else
         echo "Create image path"
     fi
-    dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
+    dd if=/dev/$devName of=~/images/image-`date +%Y%m%d_%H%M%S`.img status=progress
 
 # If the user fails the failsafe, bail
 else
