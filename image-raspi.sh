@@ -1,6 +1,6 @@
 #!/bin/bash
-#failsafe='I have confirmed all information is correct and understand the risks'
-failsafe='check'
+failsafe='I have confirmed all information is correct and understand the risks'
+#failsafe='check'
 processInput=''
 user=''
 
