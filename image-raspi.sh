@@ -38,6 +38,9 @@ clear
 if [[ $processInput == 'C' || $processInput == 'c' ]]
 then
 
+    # Mark as valid option
+    runSuccess = 1
+
     # Get what device to read from
     fdisk -l
     echo "What device is the SD card connected to? E.g., sdc, mmcblk0"
