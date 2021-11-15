@@ -1,8 +1,17 @@
 #!/bin/bash
 failsafe='I have confirmed all information is correct and understand the risks'
 #failsafetesting='check'
-processInput='C'
+processInput=''
 runSuccess=0
+clear
+
+#disclaimer
+echo "This program, when used improperly, can irreversably destroy all data on your computer."
+echo "This program contains absolutely no warranty where permissible by law."
+echo "By continuing to use this program, you consent to the Terms of Service of this program and understand the risks."
+echo "If you do not consent to the Terms of Service, please close the program now."
+echo "This disclaimer will show for 10 seconds."
+sleep 10
 
 # Commented out because mass imaging isn't quite ready
 #echo "Would you like to Create an image, Restore an image, or Mass-restore images?"
@@ -10,11 +19,13 @@ runSuccess=0
 #read processInput
 
 # Decide what process the user would like to run
+clear
 echo "Would you like to Create an image or Restore an image"
 echo "C/R"
 read processInput
 
 # Create an image
+clear
 if [[ processInput==C || processInput==c ]]
 then
 
