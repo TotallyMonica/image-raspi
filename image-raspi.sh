@@ -1,6 +1,8 @@
 #!/bin/bash
 failsafe='I have confirmed all information is correct and understand the risks'
+#failsafetesting='check'
 processInput='C'
+runSuccess=0
 
 # Commented out because mass imaging isn't quite ready
 #echo "Would you like to Create an image, Restore an image, or Mass-restore images?"
@@ -10,7 +12,7 @@ processInput='C'
 # Decide what process the user would like to run
 echo "Would you like to Create an image or Restore an image"
 echo "C/R"
-#read processInput
+read processInput
 
 # Create an image
 if [[ processInput==C || processInput==c ]]
@@ -34,18 +36,25 @@ then
     read imageConfirmation
 
     # If the user successfully passes the failsafe, then create an image
-    if [[ imageConfirmation==failsafe ]]; then
-        mkdir ~/images
-        dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
+    if [[ $imageConfirmation == $failsafe ]]; then
+#   if [[ $imageConfirmation == $failsafetesting ]]; then
+        if [ -d ~/images ]; then
+            #mkdir ~/images
+            echo "Images path exist, skipping"
+        else
+            echo "Create image path"
+        fi
+        #dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
+        echo "dd /dev/$devname command goes here"
     
     # If the user fails the failsafe, bail
     else
         echo "Confirmation failed, exiting"
         exit
     fi
-fi
+
 # Restore an image
-if [[ processInput==R || processInput==r ]]
+elif [[ processInput==R || processInput==r ]]
 then
 
     # Mark as a valid option
@@ -90,9 +99,8 @@ then
         exit
     fi
 
-fi
 # Mass image
-if [[ processInput == M || processInput == m ]]
+elif [[ processInput == M || processInput == m ]]
 then
 
     # Mark as a valid option
