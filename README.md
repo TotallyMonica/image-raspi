@@ -22,3 +22,4 @@ This isn't organized in any certain way and assistance is definitely asked for. 
  - Checking if being run as root
  - Backing up over the network (SSH, FTP, SFTP, etc.)
  - Windows and MacOS clients
+ - Adjust disclaimer to have a user input to acknowledge message
