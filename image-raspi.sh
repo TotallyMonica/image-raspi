@@ -1,5 +1,5 @@
 #!/bin/bash
-#failsafe='I have confirmed all information is correct and understand the risks'
+failsafe='I have confirmed all information is correct and understand the risks'
 #failsafetesting='check'
 processInput=''
 runSuccess=0
