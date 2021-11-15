@@ -8,7 +8,6 @@ runSuccess=0
 if [[ $UID != 0 ]]
 then
     echo "Error: Not being ran as root (most distros you need to preface the command with sudo"
-    echo $UID
     exit
 fi
 
@@ -95,7 +94,7 @@ then
     fi
 
     # Check to see if image is valid
-    if [ ! -e ~/images/imagePath]; then
+    if [ ! -e ~/images/$imagePath]; then
         echo "The image you selected does not exist. Please ensure you typed the correct name out."
         exit
     fi
@@ -106,10 +105,10 @@ then
     read imageConfirmation
 
     # If the user successfully passes the failsafe, then create an image
-    if imageConfirmation == failsafe; then
-        mkdir ~/images
-        dd if=~/images/$imagePath of=/dev/$devName status=progress
-    
+    if [[$imageConfirmation == $failsafetesting]]
+    then
+        #dd if=~/images/$imagePath of=/dev/$devName status=progress
+        echo "Imaging from " ~/images/$imagePath " to " /dev/$devName
     # If the user fails the failsafe, bail
     else
         echo "Confirmation failed, exiting"
