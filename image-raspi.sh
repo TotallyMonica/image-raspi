@@ -74,9 +74,8 @@ then
         echo "Confirmation failed, exiting"
         exit
     fi
-fi
 # Restore an image
-if [[ $processInput == 'R' || $processInput == 'r' ]]
+elif [[ $processInput == 'R' || $processInput == 'r' ]]
 then
 
     # Mark as a valid option
@@ -121,8 +120,7 @@ then
     fi
 
 # Mass image
-fi
-if [[ $processInput == M || $processInput == m ]]
+elif [[ $processInput == M || $processInput == m ]]
 then
 
     # Mark as a valid option
@@ -130,6 +128,7 @@ then
 
     # Not ready yet, need to get a bit more comfortable with bash first
     # Easter egg: if they decide to try to get access to this, encourage them to contribute to the project.
+    # Totally not me being lazy and just not wanting to comment out the elif statement
     echo "Multiple imaging isn't quite ready! If you feel confident, I encourage you to create a pull request or an issue with suggestions on github."
     echo "Even though you likely got this from github, you can create a pull request at https://github.com/TotallyMonica/image-raspi"
     echo "- Monica"
@@ -147,9 +146,9 @@ then
     # List disks and get physical disk location
     fdisk -l
     #for (( i=1; i<=diskCount; i++ ))
-fi
 
 # If any of the other commands didn't run, 
-if [[ runSuccess == 0 ]]; then
+else
     echo "You entered an invalid command."
+    exit
 fi
