@@ -1,10 +1,12 @@
 # Image Raspberry Pi
 ## An easy-to-use imaging tool for Raspberry Pi's
 There's a multitude of reasons why you'd want to be able to make multiple copies of a Raspberry Pi SD card, such as
+
  - Using for lessons on how to use a Raspberry Pi
+
  - Making backups
+
  - Using Raspbery Pis for identical or near-identical usage
- - 
 
 ## Usage:
 `./image-raspi.sh`
