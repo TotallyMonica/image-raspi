@@ -8,6 +8,7 @@ runSuccess=0
 if [[ $UID!=0 ]]
 then
     echo "Error: Not being ran as root (most distros you need to preface the command with sudo"
+    exit
 fi
 
 # Disclaimer
