@@ -13,7 +13,7 @@ echo "C/R"
 #read processInput
 
 # Create an image
-if [[ processInput==C || processInput == c ]]
+if [[ processInput==C || processInput==c ]]
 then
 
     # Get what device to read from
@@ -22,7 +22,7 @@ then
     read devName
 
     # Check to see if the user followed instructions and disks are located in /dev
-    if [ ! -e /dev/$devName]; then
+    if [ ! -e "/dev/$devName" ]; then
         echo "Either you included /dev/* or your disks are located in a different path other than /dev."
         exit
     fi
@@ -34,7 +34,7 @@ then
     read imageConfirmation
 
     # If the user successfully passes the failsafe, then create an image
-    if imageConfirmation == failsafe; then
+    if [[ imageConfirmation==failsafe ]]; then
         mkdir ~/images
         dd if=/dev/$devName of=~/images/-+%Y%m%d_%H%M%S.img status=progress
     
@@ -45,7 +45,7 @@ then
     fi
 fi
 # Restore an image
-if [[ processInput == R || processInput == r ]]
+if [[ processInput==R || processInput==r ]]
 then
 
     # Mark as a valid option
