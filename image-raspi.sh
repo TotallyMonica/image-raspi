@@ -46,6 +46,7 @@ then
     read devName
 
     # Check to see if the user followed instructions and disks are located in /dev
+    clear
     if [ ! -e "/dev/$devName" ]; then
         echo "Either you included /dev/* or your disks are located in a different path other than /dev."
         exit
@@ -83,6 +84,7 @@ then
     read devName
 
     # Check to see if the user followed instructions and disks are located in /dev
+    clear
     if [[ ! -e /dev/$devName ]]; then
         echo "Either you included /dev/* or your disks are located in a different path other than /dev."
         exit
@@ -91,6 +93,7 @@ then
     # Get what image to read from
     # and check its valididty
     # TODO: Allow custom paths, currently reads from ~/images
+    clear
     if [[ ! -e ~/images/$imagePath ]]; then
         echo "The image you selected does not exist. Please ensure you typed the correct name out."
         exit
@@ -108,6 +111,7 @@ then
     fi
 
     #Confirmation screen
+    clear
     echo ""
     echo "The image " ~/images/$imagePath " and flashed to /dev/$devName"
     echo "Please ensure everything is correct, as this process is potentially dangerous."
