@@ -17,10 +17,11 @@ echo "This program, when used improperly, can irreversably destroy all data on y
 echo "This program contains absolutely no warranty where permissible by law."
 echo "By continuing to use this program, you consent to the Terms of Service of this program and understand the risks."
 echo "If you do not consent to the Terms of Service, please close the program now."
-echo "This disclaimer will show for 10 seconds."
+echo "This disclaimer will show for 10 seconds, press any key to continue"
 
 # Sleep only commented out for testing
 sleep 10
+pause
 
 # Commented out because mass imaging isn't quite ready
 #echo "Would you like to Create an image, Restore an image, or Mass-restore images?"
@@ -116,7 +117,7 @@ then
     # If the user successfully passes the failsafe, then create an image
     if [[ $imageConfirmation == $failsafe ]]; then
         echo "Imaging from " ~/images/$imagePath " to " /dev/$devName
-        echo dd if=~/images/$imagePath of=/dev/$devName status=progress
+        dd if=~/images/$imagePath of=/dev/$devName status=progress
     # If the user fails the failsafe, bail
     else
         echo "Confirmation failed, exiting"
